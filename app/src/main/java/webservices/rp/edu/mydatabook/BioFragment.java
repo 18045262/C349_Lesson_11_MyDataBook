@@ -1,6 +1,9 @@
 package webservices.rp.edu.mydatabook;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -84,9 +90,50 @@ public class BioFragment extends Fragment {
     }
 
     public void openDialog() {
-        final Dialog dialog = new Dialog(getContext()); // Context, this, etc.
-        dialog.setContentView(R.layout.dialog);
-        dialog.setTitle("Edit Bio");
-        dialog.show();
+//        final Dialog dialog = new Dialog(getContext()); // Context, this, etc.
+//        dialog.setContentView(R.layout.dialog);
+//        dialog.setTitle("Edit Bio");
+//
+//        dialog.show();
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Bio");
+        alertDialog.setMessage("Edit");
+
+        final EditText input = new EditText(getContext());
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+
+
+        alertDialog.setPositiveButton("Save",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (input.getText().toString()!= null) {
+                         Toast.makeText(getContext(),
+                                        "Save", Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+                    }
+                });
+
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(),
+                                "Cancel", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
     }
+
+
+
 }
